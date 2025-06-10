@@ -1,13 +1,24 @@
-import React from 'react';
+// About.jsx com suporte a tema escuro e internacionalização
+import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function About() {
+  const { t } = useTranslation();
+
   return (
-    <section id="about" className="py-16 px-6 bg-pearl text-prussian">
-      <h2 className="text-3xl font-bold text-center mb-8">Sobre</h2>
-      <p className="max-w-3xl mx-auto text-center">
-        Na MaiCode, desenvolvemos soluções digitais rápidas e eficientes para quem precisa colocar suas ideias em prática com agilidade.
-        Nossa missão é oferecer serviços de qualidade com foco em resultado, sempre com um visual moderno e profissional.
-      </p>
+    <section className="py-20 bg-pearl text-prussian dark:bg-prussian dark:text-pearl px-4">
+      <motion.div
+        className="max-w-3xl mx-auto text-center"
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <h2 className="text-3xl font-bold mb-4">{t("about_titulo")}</h2>
+        <p className="text-gray-700 dark:text-gray-300 text-lg">
+          {t("about_texto")}
+        </p>
+      </motion.div>
     </section>
   );
 }

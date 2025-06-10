@@ -1,27 +1,33 @@
-// src/pages/Portfolio.jsx
-import React from 'react';
+// Portfolio.jsx com suporte a tema escuro e internacionalização
+import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function Portfolio() {
+  const { t } = useTranslation();
+
+  const projetos = [
+    { nome: t("projeto_1_nome"), descricao: t("projeto_1_desc"), id: 1 },
+    { nome: t("projeto_2_nome"), descricao: t("projeto_2_desc"), id: 2 },
+    { nome: t("projeto_3_nome"), descricao: t("projeto_3_desc"), id: 3 },
+  ];
+
   return (
-    <section id="portfolio" className="py-16 px-6 bg-white text-prussian">
-      <h2 className="text-3xl font-bold text-center mb-10">Portfólio</h2>
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="bg-pearl p-4 rounded shadow">
-          <h3 className="font-semibold text-lg">Site para Psicóloga</h3>
-          <p>Landing page com agendamento integrado e visual acolhedor.</p>
-        </div>
-        <div className="bg-pearl p-4 rounded shadow">
-          <h3 className="font-semibold text-lg">Bot para Instagram</h3>
-          <p>Automação de respostas para interação com seguidores.</p>
-        </div>
-        <div className="bg-pearl p-4 rounded shadow">
-          <h3 className="font-semibold text-lg">Dashboard de Vendas</h3>
-          <p>Visualização de KPIs com dados atualizados em tempo real.</p>
-        </div>
-        <div className="bg-pearl p-4 rounded shadow">
-          <h3 className="font-semibold text-lg">Sistema de Orçamento</h3>
-          <p>Plataforma de geração e gerenciamento de orçamentos online.</p>
-        </div>
+    <section id="portfolio" className="py-20 bg-pearl text-prussian dark:bg-prussian dark:text-pearl px-4">
+      <h2 className="text-3xl font-bold text-center mb-12">{t("portfolio_titulo")}</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {projetos.map((projeto, index) => (
+          <motion.div
+            key={projeto.id}
+            className="bg-white dark:bg-[#1f2937] border border-gray-300 dark:border-gray-600 p-6 rounded-lg shadow hover:shadow-lg transition"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-xl font-semibold mb-2">{projeto.nome}</h3>
+            <p className="text-gray-600 dark:text-gray-300">{projeto.descricao}</p>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
